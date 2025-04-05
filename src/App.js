@@ -6,7 +6,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from "chart.
 
 ChartJS.register(CategoryScale, LinearScale, BarElement);
 
-const API = "https://your-backend-url.onrender.com/api/gos"; // replace this after backend is live
+const API = "https://go-backend-8us9.onrender.com"; // replace this after backend is live
 
 function App() {
   const [gos, setGOs] = useState([]);
