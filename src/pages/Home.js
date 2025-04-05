@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API = "https://your-render-backend-url/api/gos";
+const API = "https://go-backend-8us9.onrender.com";
 
 export default function Home() {
   const [gos, setGOs] = useState([]);
