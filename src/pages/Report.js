@@ -5,7 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const API = "https://your-render-backend-url/api/gos/report";
+const API = "https://go-backend-8us9.onrender.com";
 
 export default function Report() {
   const [data, setData] = useState([]);
