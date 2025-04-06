@@ -22,7 +22,7 @@ function App() {
     console.log('GO to send:', newGO);
 
     try {
-      const res = await fetch('https://your-backend-url.onrender.com/api/gos', {
+      const res = await fetch('https://go-backend-8us9.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
