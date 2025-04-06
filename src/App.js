@@ -14,7 +14,7 @@ function App() {
     const newGO = { name, country, volume: Number(volume), tech, date };
 
     try {
-      const res = await fetch('https://your-backend-url.onrender.com/api/gos', { // Replace with your backend URL from Render
+      const res = await fetch('https://go-backend-8us9.onrender.com', { // Replace with your backend URL from Render
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
