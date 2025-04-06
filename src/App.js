@@ -1,80 +1,61 @@
-
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from "chart.js";
-
-ChartJS.register(CategoryScale, LinearScale, BarElement);
-
-const API = "https://go-backend-8us9.onrender.com"; // replace this after backend is live
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [name, setName] = useState('');
+  const [country, setCountry] = useState('');
+  const [volume, setVolume] = useState('');
+  const [tech, setTech] = useState('');
+  const [date, setDate] = useState('');
   const [gos, setGOs] = useState([]);
-  const [search, setSearch] = useState("");
-  const [report, setReport] = useState([]);
 
-  const fetchGOs = async () => {
-    const res = await axios.get(API);
-    setGOs(res.data);
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const fetchReport = async () => {
-    const res = await axios.get(API + "/report");
-    setReport(res.data);
-  };
+    const newGO = { name, country, volume: Number(volume), tech, date };
 
-  const handleAdd = async () => {
-    const name = prompt("Name:");
-    const country = prompt("Country:");
-    const tech = prompt("Technology:");
-    const volume = parseFloat(prompt("Volume:"));
-    const date = prompt("Date (YYYY-MM-DD):");
+    try {
+      const res = await fetch('https://your-backend-url.onrender.com/api/gos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newGO),
+      });
 
-    await axios.post(API, { name, country, tech, volume, date });
-    fetchGOs();
-    fetchReport();
-  };
-
-  const handleSearch = async () => {
-    const res = await axios.get(API + "/search?name=" + search);
-    setGOs(res.data);
+      const data = await res.json();
+      console.log('Saved:', data);
+      setGOs([...gos, data]);
+    } catch (err) {
+      console.error('Error submitting GO:', err);
+    }
   };
 
   useEffect(() => {
-    fetchGOs();
-    fetchReport();
+    fetch('https://your-backend-url.onrender.com/api/gos')
+      .then((res) => res.json())
+      .then((data) => setGOs(data));
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>GO Portfolio</h1>
+    <div style={{ padding: '20px' }}>
+      <h1>Guarantees of Origin Portfolio</h1>
+      <form onSubmit={handleSubmit}>
+        <input placeholder="Name" value={name} onChange={e => setName(e.target.value)} required /><br />
+        <input placeholder="Country" value={country} onChange={e => setCountry(e.target.value)} required /><br />
+        <input type="number" placeholder="Volume (MWh)" value={volume} onChange={e => setVolume(e.target.value)} required /><br />
+        <input placeholder="Technology (e.g., Solar, Wind)" value={tech} onChange={e => setTech(e.target.value)} /><br />
+        <input type="date" value={date} onChange={e => setDate(e.target.value)} required /><br />
+        <button type="submit">Add GO Deal</button>
+      </form>
 
-      <div>
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name"
-        />
-        <button onClick={handleSearch}>Search</button>
-        <button onClick={handleAdd}>Add GO</button>
-      </div>
-
-      <h2>GOs</h2>
+      <h2>Existing GO Deals</h2>
       <ul>
-        {gos.map((go, idx) => (
-          <li key={idx}>
-            {go.name} – {go.country} – {go.tech} – {go.volume} – {go.date?.slice(0, 10)}
+        {gos.map((go, index) => (
+          <li key={index}>
+            {go.name} | {go.country} | {go.volume} MWh | {go.tech} | {new Date(go.date).toLocaleDateString()}
           </li>
         ))}
       </ul>
-
-      <h2>Portfolio Report</h2>
-      <Bar
-        data={{
-          labels: report.map((r) => r._id),
-          datasets: [{ label: "Volume", data: report.map((r) => r.total), backgroundColor: "teal" }]
-        }}
-      />
     </div>
   );
 }
