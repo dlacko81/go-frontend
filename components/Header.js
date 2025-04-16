@@ -1,7 +1,7 @@
 function Header() {
   return (
     <header>
-      <h1>Client Transaction Data</h1>
+      <h1>AMD GOs Database</h1>
     </header>
   );
 }
