@@ -1,6 +1,10 @@
 import React from "react";
 
 function Statistics({ data }) {
+  // Debugging: Check if data is passed correctly
+  console.log("Data received:", data);
+  
+  // If no data is passed, return an empty message
   if (!data || data.length === 0) return <p>No data available</p>;
 
   // Define indexes based on your data structure
@@ -13,13 +17,15 @@ function Statistics({ data }) {
 
   data.forEach((row) => {
     const client = row[CLIENT_NAME_IDX];
-    const volume = parseFloat(row[VOLUME_IDX]) || 0;
+    const volume = parseFloat(row[VOLUME_IDX]) || 0; // Handle non-numeric values gracefully
 
     // Sum up the volumes for each client
-    if (volumeByClient[client]) {
-      volumeByClient[client] += volume;
-    } else {
-      volumeByClient[client] = volume;
+    if (client && !isNaN(volume)) {
+      if (volumeByClient[client]) {
+        volumeByClient[client] += volume;
+      } else {
+        volumeByClient[client] = volume;
+      }
     }
   });
 
