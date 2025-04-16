@@ -27,7 +27,7 @@ export default function InputForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://go-backend-1-lxgb.onrender.com", {
+      const res = await fetch("https://go-backend-1-lxgb.onrender.com/api/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -48,7 +48,7 @@ export default function InputForm() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("https://go-backend-1-lxgb.onrender.com");
+      const res = await fetch("https://go-backend-1-lxgb.onrender.com/api/data");
       const result = await res.json();
       setData(result);
     } catch (err) {
