@@ -48,7 +48,7 @@ export default function InputForm() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/api/data");
+      const res = await fetch("https://go-backend-1-lxgb.onrender.com");
       const result = await res.json();
       setData(result);
     } catch (err) {
