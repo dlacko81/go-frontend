@@ -6,7 +6,7 @@ export default function Home() {
   const [data, setData] = useState([]); // state to hold your fetched data
 
   const handleLogin = () => {
-    if (password === "yourpassword") {
+    if (password === "PassWord") {
       setAuthenticated(true);
     } else {
       alert("Wrong password");
