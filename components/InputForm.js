@@ -109,7 +109,7 @@ const InputForm = () => {
           value={formData.clientDirection}
           onChange={handleChange}
         >
-          <option value="">Select clientDirection</option>
+          <option value="">Select Client Direction</option>
           <option>Sell</option>
           <option>Buy</option>
         </select>
