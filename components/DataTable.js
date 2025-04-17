@@ -5,6 +5,7 @@ function DataTable({ data }) {
         <tr>
           <th>Client Name</th>
           <th>Date</th>
+          <th>Client Direction</th>
           <th>Volume</th>
           <th>Vintage</th>
           <th>Technology</th>
@@ -18,6 +19,7 @@ function DataTable({ data }) {
           <tr key={index}>
             <td>{row.clientName}</td>
             <td>{row.date}</td>
+            <td>{row.clientDirection}</td>
             <td>{row.volume}</td>
             <td>{row.vintage}</td>
             <td>{row.technology}</td>
