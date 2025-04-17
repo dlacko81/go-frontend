@@ -13,6 +13,7 @@ const InputForm = () => {
   const [formData, setFormData] = useState({
     clientName: "",
     transactionDate: "",
+    clientDirection: "",
     volume: "",
     vintage: "",
     technology: "",
@@ -55,6 +56,7 @@ const InputForm = () => {
       setFormData({
         clientName: "",
         transactionDate: "",
+        clientDirection: "",
         volume: "",
         vintage: "",
         technology: "",
@@ -102,6 +104,15 @@ const InputForm = () => {
           onChange={handleChange}
           required
         />
+       <select
+          name="clientDirection"
+          value={formData.clientDirection}
+          onChange={handleChange}
+        >
+          <option value="">Select clientDirection</option>
+          <option>Sell</option>
+          <option>Buy</option>
+        </select>
         <input
           name="volume"
           placeholder="Volume (MWh)"
@@ -164,6 +175,7 @@ const InputForm = () => {
           <tr>
             <th>Client Name</th>
             <th>Date</th>
+            <th>Client Direction</th>
             <th>Volume (MWh)</th>
             <th>Vintage</th>
             <th>Technology</th>
