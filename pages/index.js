@@ -17,6 +17,15 @@ export default function Home() {
     }
   };
 
+export default function Home({ data }) {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <Statistics data={data} />
+    </div>
+  );
+}
+  
   const handleFormSubmit = (formData) => {
     setData([...data, formData]);
   };
