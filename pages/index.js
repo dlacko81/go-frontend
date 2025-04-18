@@ -25,7 +25,7 @@ export default function Home({ data }) {
     </div>
   );
 }
-  
+
   const handleFormSubmit = (formData) => {
     setData([...data, formData]);
   };
